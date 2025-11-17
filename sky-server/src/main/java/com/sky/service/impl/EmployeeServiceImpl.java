@@ -84,13 +84,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         //默认密码
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
-        //设置时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-
-        //登录用户id
-        employee.setCreateUser(JwtTokenAdminInterceptor.get());
-        employee.setUpdateUser(JwtTokenAdminInterceptor.get());
         employeeMapper.insert(employee);
 
     }
