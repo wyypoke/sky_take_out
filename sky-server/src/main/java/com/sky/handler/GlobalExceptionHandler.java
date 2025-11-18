@@ -7,6 +7,7 @@ import com.sky.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.sql.SQLException;
 
@@ -38,4 +39,10 @@ public class GlobalExceptionHandler {
         }
         return Result.error(ex.getMessage());
     }
+    @ExceptionHandler(HttpClientErrorException.class)
+    public Result HttpClientErrorExceptionHandler(HttpClientErrorException ex) {
+        log.error(ex.getMessage());
+        return Result.error(ex.getMessage());
+    }
+
 }
