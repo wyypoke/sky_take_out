@@ -9,6 +9,7 @@ import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface DishMapper {
@@ -32,4 +33,13 @@ public interface DishMapper {
 
     @Delete("DELETE FROM dish WHERE id = #{id}")
     int deleteById(Long id);
+
+    @Update("UPDATE dish " +
+            "SET create_user = #{createUser}, " +
+            "    create_time = #{createTime} " +
+            "WHERE id = #{id}")
+    void updateCreate(Dish dish);
+
+    @Select("select * from dish where name = #{name}")
+    Dish getByName(String name);
 }

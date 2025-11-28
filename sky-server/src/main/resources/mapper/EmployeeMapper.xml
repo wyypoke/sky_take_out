@@ -5,7 +5,7 @@
     <select id="pageQuery" resultType="com.sky.entity.Employee">
         select * from employee
     </select>
-    <update id="update" parameterType="Employee">
+    <update id="update" parameterType="com.sky.entity.Employee">
         UPDATE employee
         <set>
             <if test="username != null and username != ''">username = #{username},</if>

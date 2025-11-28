@@ -20,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 @Slf4j
 @Service
@@ -39,8 +41,9 @@ public class DishServiceImpl implements DishService {
         List<DishFlavor> dishFlavorList = dishDTO.getFlavors();
         if(dishFlavorList != null && !dishFlavorList.isEmpty()) {
             dishFlavorList.forEach(dishFlavor -> dishFlavor.setDishId(dish.getId()));
+            dishFlavorMapper.insertBatch(dishFlavorList);
         }
-        dishFlavorMapper.insertBatch(dishFlavorList);
+        dishDTO.setId(dish.getId());
         return Result.success();
     }
 
@@ -98,6 +101,27 @@ public class DishServiceImpl implements DishService {
         }
         return;
     }
+    /**
+     * 更新菜品
+     */
+    @Transactional
+    public Result update(DishDTO dishDTO) {
+        log.info("更新菜品：{}", dishDTO);
+        Dish dish = dishMapper.getById(dishDTO.getId());
+        dishMapper.deleteById(dish.getId());
+        saveWithFlavor(dishDTO);
+        dish.setId(dishDTO.getId());
+        dishMapper.updateCreate(dish);
+        return Result.success();
+    }
 
+    @Override
+    public DishVO getById(Long id) {
+        Dish dish = dishMapper.getById(id);
+        DishVO dishVO = DishVO.builder().build();
+        BeanUtils.copyProperties(dish, dishVO);
+        dishVO.setFlavors(new ArrayList<>());
+        return dishVO;
+    }
 
 }

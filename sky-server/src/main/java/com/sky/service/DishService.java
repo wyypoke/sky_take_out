@@ -2,6 +2,8 @@ package com.sky.service;
 
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
+import com.sky.vo.DishVO;
+import com.sky.entity.Dish;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 
@@ -15,4 +17,8 @@ public interface DishService {
     public void delete(Long id);
 
     public void deleteBatch(List<Long> idList);
+
+    public Result update(DishDTO dishDTO);
+
+    DishVO getById(Long id);
 }
