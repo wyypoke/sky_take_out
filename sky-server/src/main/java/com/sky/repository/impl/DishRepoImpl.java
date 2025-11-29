@@ -118,7 +118,7 @@ public class DishRepoImpl implements DishRepo {
         LambdaQueryWrapper<Dish> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(dish.getCategoryId() != null,
                 Dish::getCategoryId,
-                dish.getCategoryId() != null);
+                dish.getCategoryId());
         wrapper.like(dish.getName() != null && !dish.getName().equals(""),
                 Dish::getName,
                 dish.getName() != null);
