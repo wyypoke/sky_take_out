@@ -29,4 +29,6 @@ public interface DishRepo {
     Result saveWithFlavor(DishDTO dishDTO);
 
     List<Dish> select(Dish dish);
+
+    List<Dish> getBySetmealId(Long id);
 }

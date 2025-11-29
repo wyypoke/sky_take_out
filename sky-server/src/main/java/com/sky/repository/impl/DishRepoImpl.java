@@ -128,6 +128,15 @@ public class DishRepoImpl implements DishRepo {
         return dishMapper.selectList(wrapper);
     }
 
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Dish> getBySetmealId(Long id) {
+        return dishMapper.getBySetmealId(id);
+    }
+
     private boolean deletable(Long id) {
         Dish dish = dishMapper.selectById(id);
         log.info("判断菜品{}是否可以删除", dish);
