@@ -124,4 +124,9 @@ public class DishServiceImpl implements DishService {
         return dishVO;
     }
 
+    @Override
+    public List<Dish> selectEnableDishByCategoryId(Long categoryId) {
+        return List.of();
+    }
+
 }

@@ -21,4 +21,6 @@ public interface DishService {
     public Result update(DishDTO dishDTO);
 
     DishVO getById(Long id);
+
+    List<Dish> selectEnableDishByCategoryId(Long categoryId);
 }

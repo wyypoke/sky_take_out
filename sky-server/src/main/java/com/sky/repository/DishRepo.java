@@ -7,6 +7,8 @@ import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.vo.DishVO;
 
+import java.util.List;
+
 public interface DishRepo {
     PageResult pageQuery(DishPageQueryDTO dto);
     /**
@@ -25,4 +27,6 @@ public interface DishRepo {
     void update(DishDTO dish);
 
     Result saveWithFlavor(DishDTO dishDTO);
+
+    List<Dish> select(Dish dish);
 }

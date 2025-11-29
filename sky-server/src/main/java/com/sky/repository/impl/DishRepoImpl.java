@@ -109,6 +109,25 @@ public class DishRepoImpl implements DishRepo {
         return Result.success();
     }
 
+    /**
+     * @param dish
+     * @return
+     */
+    @Override
+    public List<Dish> select(Dish dish) {
+        LambdaQueryWrapper<Dish> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(dish.getCategoryId() != null,
+                Dish::getCategoryId,
+                dish.getCategoryId() != null);
+        wrapper.like(dish.getName() != null && !dish.getName().equals(""),
+                Dish::getName,
+                dish.getName() != null);
+        wrapper.eq(dish.getStatus() != null,
+                Dish::getStatus,
+                dish.getStatus());
+        return dishMapper.selectList(wrapper);
+    }
+
     private boolean deletable(Long id) {
         Dish dish = dishMapper.selectById(id);
         log.info("判断菜品{}是否可以删除", dish);

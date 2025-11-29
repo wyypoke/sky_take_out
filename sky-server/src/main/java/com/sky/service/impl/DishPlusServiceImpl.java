@@ -1,5 +1,6 @@
 package com.sky.service.impl;
 
+import com.sky.constant.StatusConstant;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
@@ -69,5 +70,18 @@ public class DishPlusServiceImpl implements DishService {
         BeanUtils.copyProperties(dish, dishVO);
         dishVO.setFlavors(flavors);
         return dishVO;
+    }
+
+    /**
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Dish> selectEnableDishByCategoryId(Long categoryId) {
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+        return dishRepo.select(dish);
     }
 }
