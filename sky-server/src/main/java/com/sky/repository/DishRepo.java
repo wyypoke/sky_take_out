@@ -1,8 +1,10 @@
 package com.sky.repository;
 
+import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.result.PageResult;
+import com.sky.result.Result;
 import com.sky.vo.DishVO;
 
 public interface DishRepo {
@@ -18,7 +20,9 @@ public interface DishRepo {
 
     Dish getById(Long id);
 
-    int deleteById(Long id);
+    void deleteById(Long id);
 
-    void update(Dish dish);
+    void update(DishDTO dish);
+
+    Result saveWithFlavor(DishDTO dishDTO);
 }

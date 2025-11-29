@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.List;
 @Slf4j
 public class DishController {
     @Autowired
+    @Qualifier("dishPlusServiceImpl")
     private DishService dishService;
     @PostMapping
     @ApiOperation("新增菜品")
