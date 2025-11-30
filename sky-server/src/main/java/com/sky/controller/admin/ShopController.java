@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin/shop")
+@RequestMapping({"/admin/shop", "/user/shop"}) // TODO 用户端控制器
 @Api(tags = "店铺接口")
 @Slf4j
 public class ShopController {
@@ -22,5 +22,12 @@ public class ShopController {
 
         shopService.startOrStop(status);
         return Result.success();
+    }
+    @GetMapping("/status")
+    @ApiOperation("设置店铺营业状态")
+    public Result getStatus() {
+
+
+        return Result.success(shopService.getStatus());
     }
 }

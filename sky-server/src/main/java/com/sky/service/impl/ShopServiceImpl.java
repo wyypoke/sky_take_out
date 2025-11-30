@@ -18,4 +18,12 @@ public class ShopServiceImpl implements ShopService {
 
         redisTemplate.opsForValue().set(key, status);
     }
+
+    /**
+     * @return
+     */
+    @Override
+    public Integer getStatus() {
+        return (Integer) redisTemplate.opsForValue().get(key);
+    }
 }
