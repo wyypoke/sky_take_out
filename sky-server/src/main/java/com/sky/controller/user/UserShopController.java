@@ -1,4 +1,4 @@
-package com.sky.controller.admin;
+package com.sky.controller.user;
 
 import com.sky.config.DebugConfig;
 import com.sky.result.Result;
@@ -10,24 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin/shop") // TODO 用户端控制器
+@RequestMapping("/user/shop")
 @Api(tags = "店铺接口")
 @Slf4j
-public class ShopController {
+public class UserShopController {
     @Autowired
     private ShopService shopService;
-    @PutMapping("/{status}")
-    @ApiOperation("设置店铺营业状态")
-    public Result startOrStop(@PathVariable("status") Integer status) {
-
-        shopService.startOrStop(status);
-        return Result.success();
-    }
     @GetMapping("/status")
     @ApiOperation("获取店铺营业状态")
     public Result getStatus() {
-
-
         return Result.success(shopService.getStatus());
     }
 }
