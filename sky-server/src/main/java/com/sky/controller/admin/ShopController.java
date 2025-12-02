@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin/shop") // TODO 用户端控制器
+@RequestMapping("/admin/shop")
 @Api(tags = "店铺接口")
 @Slf4j
 public class ShopController {

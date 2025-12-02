@@ -1,6 +1,7 @@
 package com.sky.controller.user;
 
 import com.sky.constant.JwtClaimsConstant;
+import com.sky.dto.UserLoginDTO;
 import com.sky.entity.User;
 import com.sky.properties.JwtProperties;
 import com.sky.result.Result;
@@ -35,10 +36,10 @@ public class UserController {
      */
     @PostMapping("/login")
     @ApiOperation("用户登录")
-    public Result<UserLoginVO> login(@RequestBody String code) {
+    public Result<UserLoginVO> login(@RequestBody UserLoginDTO code) {
         log.info("用户登录：{}", code);
 
-        User user= userService.login(code);
+        User user= userService.login(code.getCode());
         log.info("用户登录：{}", user);
         //登录成功后，生成jwt令牌
         Map<String, Object> claims = new HashMap<>();

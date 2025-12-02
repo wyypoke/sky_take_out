@@ -10,6 +10,8 @@ import com.sky.entity.DishFlavor;
 import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
+import com.sky.repository.DishFlavorRepo;
+import com.sky.repository.DishRepo;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.DishService;
@@ -26,6 +28,11 @@ import java.util.List;
 @Slf4j
 @Service
 public class DishServiceImpl implements DishService {
+    @Autowired
+    private DishRepo dishRepo;
+
+    @Autowired
+    private DishFlavorRepo dishFlavorRepo;
     @Autowired
     private DishMapper dishMapper;
     @Autowired
@@ -129,4 +136,27 @@ public class DishServiceImpl implements DishService {
         return List.of();
     }
 
+    /**
+     * 条件查询菜品和口味
+     * @param dish
+     * @return
+     */
+    public List<DishVO> listWithFlavor(Dish dish) {
+        List<Dish> dishList = dishRepo.select(dish);
+
+        List<DishVO> dishVOList = new ArrayList<>();
+
+        for (Dish d : dishList) {
+            DishVO dishVO = new DishVO();
+            BeanUtils.copyProperties(d,dishVO);
+
+            //根据菜品id查询对应的口味
+            List<DishFlavor> flavors = dishFlavorRepo.selectByDishId(d.getId());
+
+            dishVO.setFlavors(flavors);
+            dishVOList.add(dishVO);
+        }
+
+        return dishVOList;
+    }
 }
